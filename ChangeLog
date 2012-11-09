@@ -1,0 +1,2190 @@
+commit 844a967b9793a100d221f357d1110fa68176da49
+Author: Dan Dennedy <dan@dennedy.org>
+Date:   Sat Dec 26 17:09:52 2009 -0800
+
+    Update ChangeLog for release.
+    
+    Signed-off-by: Dan Dennedy <dan@dennedy.org>
+
+commit ab02c6ae531bc31f3f5d8033790beadbe32b8d75
+Author: Dan Dennedy <dan@dennedy.org>
+Date:   Sat Dec 26 17:09:07 2009 -0800
+
+    Set to version 2.0.5.
+    
+    Signed-off-by: Dan Dennedy <dan@dennedy.org>
+
+commit 7fd7f4b5a4ba676ac75a5ec3608d44b4c7ecd2e4
+Author: Dan Dennedy <dan@dennedy.org>
+Date:   Sat Dec 26 08:28:31 2009 -0800
+
+    Update ChangeLog for release.
+    
+    Signed-off-by: Dan Dennedy <dan@dennedy.org>
+
+commit 284f2d9e7340d0ea80107e7b1673258557b35e4a
+Author: Dan Dennedy <dan@dennedy.org>
+Date:   Sat Dec 26 08:25:43 2009 -0800
+
+    Update release notes.
+    
+    Signed-off-by: Dan Dennedy <dan@dennedy.org>
+
+commit 4c4d62f248d1c58a0cbd35d19f8ffda9bb4551f7
+Author: Stefan Richter <stefanr@s5r6.in-berlin.de>
+Date:   Mon Nov 23 21:37:48 2009 +0100
+
+    Addendum to 'Calculate iso receive cycles on firewire-core'
+    
+    The number of packets is a 4th of the number of header bytes (in case of
+    ABI version 1).  Also, wrap after an increment over 8000.
+    
+    Signed-off-by: Stefan Richter <stefanr@s5r6.in-berlin.de>
+
+commit 72e5368aedd7eb964c1dcc14f11fa3188e9368c6
+Author: Jay Fenlason <fenlason@redhat.com>
+Date:   Thu Nov 19 15:00:02 2009 -0500
+
+    Initialize unused fields in ioctl arguments
+    
+    This change is essentially cosmetic:  Set fields of structs passed to
+    the kernel via ioctl so that valgrind will not complain about them.
+    
+    Signed-off-by: Jay Fenlason <fenlason@redhat.com>
+    Signed-off-by: Stefan Richter <stefanr@s5r6.in-berlin.de> (changelog, comments)
+
+commit 4e2fd98144d37bf73197e7058f8f6685acd748d9
+Author: Jay Fenlason <fenlason@redhat.com>
+Date:   Thu Nov 19 15:00:02 2009 -0500
+
+    Calculate iso receive cycles on firewire-core at ABI version 1
+    
+    More accurately report the cycle on which isochronous packets were
+    received.  Only affects libraw1394 when used with kernel 2.6.29 or
+    older.
+    
+    Signed-off-by: Jay Fenlason <fenlason@redhat.com>
+    Signed-off-by: Stefan Richter <stefanr@s5r6.in-berlin.de> (changelog, whitespace)
+
+commit ce82d255efa4d748e4ade922f71796a502a19c27
+Author: Jay Fenlason <fenlason@redhat.com>
+Date:   Thu Nov 19 15:00:02 2009 -0500
+
+    Fix reporting of isochronous transmit cycles on firewire-core
+    
+    While firewire-core's iso reception ABI was fixed in its version 2 to
+    report the cycle of each received packet to userspace like rawiso does,
+    this same enhancement was forgotten to add to the iso transmission ABI,
+    causing FFADO to fail to set up and maintain streaming.
+    
+    Since kernel commit 31769cef2e973544164aa7d0db2e2024660d5e21, we also
+    get iso xmit cycles in fw_cdev_event_iso_interrupt.header.  Pass these
+    to the iso receive handler.  In case of older kernels, calculate cycles
+    based on the cycle of the iso interrupt event.  These are inaccurate but
+    better than nothing.
+    
+    Signed-off-by: Jay Fenlason <fenlason@redhat.com>
+    Signed-off-by: Stefan Richter <stefanr@s5r6.in-berlin.de> (changelog, whitespace)
+
+commit 1fb09ead370c8a35d82ae53b20afdb20ea0f0243
+Author: Jay Fenlason <fenlason@redhat.com>
+Date:   Wed Nov 4 16:53:24 2009 -0500
+
+    Fix default isochronous IRQ interval on firewire-core
+    
+    libraw1394 takes a negative IRQ interval to mean "every 256 packets"
+    with the juju backend, which doesn't work well if you don't queue that
+    many.  Use buf_packets / 4 like the ieee1394 version.
+    
+    Signed-off-by: Jay Fenlason <fenlason@redhat.com>
+    Signed-off-by: Stefan Richter <stefanr@s5r6.in-berlin.de> (order, comment)
+
+commit e98abe588afa43af73c4f4fac1914e879215dead
+Author: Dan Dennedy <dan@dennedy.org>
+Date:   Sun Aug 30 23:57:54 2009 -0700
+
+    Update reference docs using kernel-doc.
+    
+    Signed-off-by: Dan Dennedy <dan@dennedy.org>
+
+commit 269967eda92848e0053c5b14799b26c743af1c44
+Author: Dan Dennedy <dan@dennedy.org>
+Date:   Tue Jun 30 11:12:55 2009 -0700
+
+    Fix build due to incomplete tarball.
+    
+    Signed-off-by: Dan Dennedy <dan@dennedy.org>
+
+commit 569d25b975c9829824431a5db3aa8ebf3da09b05
+Author: Dan Dennedy <dan@dennedy.org>
+Date:   Mon Jun 29 19:26:22 2009 -0700
+
+    Update ChangeLog from git log.
+    
+    Signed-off-by: Dan Dennedy <dan@dennedy.org>
+
+commit e4e88fee6a8227bf0025665236888563b78fc3b0
+Author: Dan Dennedy <dan@dennedy.org>
+Date:   Mon Jun 29 19:24:47 2009 -0700
+
+    Bump to v2.0.3 and update release notes.
+    
+    Signed-off-by: Dan Dennedy <dan@dennedy.org>
+
+commit cc16f4ddbe4e706041845d40270a6011a62e4c56
+Author: Dan Dennedy <dan@dennedy.org>
+Date:   Thu Jun 18 23:15:19 2009 -0700
+
+    Fix build always expecting FW_DIR.
+    
+    Date: Sun, 14 Jun 2009 11:51:33 +0100
+    From: Mike Auty <mike.auty@gmail.com>
+    Subject: [patch libraw1394-2] src/makefile.am expects FW_DIR to be set,
+    but configure only sets it if given --with-fw-dir
+    
+    Here's a very small patch for the configure system of
+    libraw1394-2.0.{0,1,2}.  At the moment, if configure is called without
+    --with-fw-dir, then FW_DIR doesn't get specified.  The Makefile includes
+    the line INCLUDES=-I$(FW_DIR) and so in the compilation we get a -I not
+    followed by anything sensible.  That can cause compilation issues in
+    certain circumstances (see Gentoo bug 272540), so this patch ensures
+    that INCLUDES is only set if --with-fw-dir was specified.
+    
+    Please let me know if there's any problems with the patch or if I've
+    submitted it to the wrong place or in the wrong way.  Thanks...
+    
+    Mike  5:)
+    
+    [1] http://bugs.gentoo.org/272540
+    
+    Signed-off-by: Dan Dennedy <dan@dennedy.org>
+
+commit 5824e34d08491dd80d6ec6f500c29c6b52a48a1a
+Author: Stefan Richter <stefanr@s5r6.in-berlin.de>
+Date:   Sun May 31 00:25:52 2009 +0200
+
+    Match only /dev/fw[0-9]* as firewire-core device files
+    
+    Previously, /dev/fw* and hence files like /dev/fwmonitor were probed
+    which may have bad effects if the client runs with access privileges.
+    
+    Signed-off-by: Stefan Richter <stefanr@s5r6.in-berlin.de>
+
+commit 489981d4ae905127a0f7c300e7d12161666fc0c8
+Author: Stefan Richter <stefanr@s5r6.in-berlin.de>
+Date:   Sat May 30 14:16:12 2009 +0200
+
+    Remove an unused struct member
+    
+    Signed-off-by: Stefan Richter <stefanr@s5r6.in-berlin.de>
+
+commit caf94aaeab5215a3f54444fc52c57f2936facdaf
+Author: Stefan Richter <stefanr@s5r6.in-berlin.de>
+Date:   Sat May 30 14:11:27 2009 +0200
+
+    Fix memory leaks with async requests on firewire-core
+    
+    Each request allocated a struct request_closure which was never freed.
+    
+    Signed-off-by: Stefan Richter <stefanr@s5r6.in-berlin.de>
+
+commit efb814334e7c70cef7c8077f7edbc6b9980a88c7
+Author: Stefan Richter <stefanr@s5r6.in-berlin.de>
+Date:   Sat May 30 13:18:59 2009 +0200
+
+    Use new async stream ioctl
+    
+    This implements asynchronous streams on juju, i.e. enables
+    raw1394_async_stream() and raw1394_start_async_stream() to work
+    with the new firewire kernel stack.
+    
+    Signed-off-by: Stefan Richter <stefanr@s5r6.in-berlin.de>
+
+commit 49dda1ef90ab1c8b57634a06a35bbbacbe17604e
+Author: Stefan Richter <stefanr@s5r6.in-berlin.de>
+Date:   Sun Jan 11 22:46:48 2009 +0100
+
+    Iso reception: Use packet timestamps in juju ABI v2
+    
+    In the firewire-cdev ABI v1, the kernel exported only the timestamp
+    of interrupt packets.  libraw1394 estimated the cycle of all packets
+    between interrupt packets by continuously incrementing the cycle.
+    
+    In v2 of the ABI, we can obtain an accurate timestamp of each packet
+    as provided by the OHCI controller.  AFAIU, this is also what you got
+    from raw1394/ ohci1394.
+    
+    Signed-off-by: Stefan Richter <stefanr@s5r6.in-berlin.de>
+
+commit c58e16442b16f85d76808209c4aa7c37adc62de4
+Author: Stefan Richter <stefanr@s5r6.in-berlin.de>
+Date:   Sun Jan 11 22:45:02 2009 +0100
+
+    Use new iso resource allocation ioctls
+    
+    This allows raw1394_bandwidth_modify() and raw1394_channel_modify()
+    to work on juju without write access to the IRM's character device file.
+    
+    If either the build-time requirement of firewire-cdev header ABI >= v.2
+    or the runtime requirement of firewire-core ABI >= v.2 is not satisfied,
+    the code falls back to transactions to the IRM as before.
+    
+    Signed-off-by: Stefan Richter <stefanr@s5r6.in-berlin.de>
+
+commit da5156af5a5b779b6713ab7dff569a10927ed188
+Author: Stefan Richter <stefanr@s5r6.in-berlin.de>
+Date:   Sun Jan 11 22:44:11 2009 +0100
+
+    Use new broadcast request ioctl
+    
+    This implements broadcast transactions on juju.
+    (Broadcast transactions are write transactions to PHY ID 63,
+    not to be confused with isochronous or asynchronous streams.)
+    
+    Signed-off-by: Stefan Richter <stefanr@s5r6.in-berlin.de>
+
+commit babed1e589012862a7a42ab74a586928ff9184fe
+Author: Stefan Richter <stefanr@s5r6.in-berlin.de>
+Date:   Sat May 16 11:00:47 2009 +0200
+
+    testlibraw: fix printing of local config ROM
+    
+    Since "testlibraw: test all cards instead of only the first", the
+    actual ROM content wasn't printed anymore due to a mistake in a
+    printf format string.
+    
+    Signed-off-by: Stefan Richter <stefanr@s5r6.in-berlin.de>
+    Signed-off-by: Dan Dennedy <dan@dennedy.org>
+
+commit cd1fb7cc84e72ab5b5f07b00111a78dca4b934a6
+Author: Dan Dennedy <dan@dennedy.org>
+Date:   Tue Feb 3 19:49:11 2009 -0800
+
+    bump version to 2.0.2 and add release notes
+    
+    Signed-off-by: Dan Dennedy <dan@dennedy.org>
+
+commit 775c2d6275fed21acdf3f2527ff37a05c3e8b56f
+Author: Dan Dennedy <dan@dennedy.org>
+Date:   Tue Feb 3 09:56:26 2009 -0800
+
+    Change the license of the "juju" fw*.[hc] files to LGPL v2.1 as approved
+    by Kristian Hogsberg in an e-mail to the linux1394-devel mailing list
+    on Feb 3, 2009.
+    
+    Signed-off-by: Dan Dennedy <dan@dennedy.org>
+
+commit d0e4313cb7893dc5f3f34cbe02dc376093889b9b
+Author: Dan Dennedy <dan@dennedy.org>
+Date:   Wed Jan 14 21:34:04 2009 -0800
+
+    bump version and add release notes
+    
+    Signed-off-by: Dan Dennedy <dan@dennedy.org>
+
+commit 8b17c2a49f8421f7d931eef7fbf2ea1bb2b04950
+Author: Stefan Richter <stefanr@s5r6.in-berlin.de>
+Date:   Sun Jan 11 22:39:17 2009 +0100
+
+    Set errno = ENOSYS in unimplemented functions
+    
+    Most of them do this already, only a few missed it.
+    
+    Signed-off-by: Stefan Richter <stefanr@s5r6.in-berlin.de>
+    Signed-off-by: Dan Dennedy <dan@dennedy.org>
+
+commit a59532c835c2a0c403059e4dbb8a6eb6e6bce516
+Author: Stefan Richter <stefanr@s5r6.in-berlin.de>
+Date:   Sat Jan 10 21:03:25 2009 +0100
+
+    Work without permission to access local node's /dev/fw*
+    
+    On 10 Jan, David Moore wrote:
+    > On Sat, 2009-01-10 at 19:28 +0100, Stefan Richter wrote:
+    >> @@ -161,14 +160,16 @@ scan_devices(fw_handle_t handle)
+    ...
+    >> +		for (j = 0; j < i; j++)
+    >> +			if (ports[j].card == get_info.card)
+    >> +				continue;
+    >> +
+    >
+    > That continue statement doesn't do what you intended I think.
+    
+    From: Stefan Richter <stefanr@s5r6.in-berlin.de>
+    Subject: [PATCH] Work without permission to access local node's /dev/fw*
+    
+    Fix for juju backend:
+    
+    libraw1394 required write permission to the character device file of
+    the local node(s) in order to enumerate cards and for a number of
+    other operations.  This forced users to either run applications like
+    dvgrab and kino with elevated privileges, or to configure write
+    permission for all /dev/fw* or at least for local nodes' /dev/fw*.
+    
+    We now use the first accessible file which was found for each card
+    for as many tasks as possible, instead of the local node's file.
+    
+    This allows distributors or admins to implement stricter access
+    rights (default off, e.g. only on for AV/C and IIDC devices)
+    without sacrificing functionality of said class of applications.
+    Access to the local node is now only required by low-level tools
+    like gscanbus.
+    
+    Signed-off-by: Stefan Richter <stefanr@s5r6.in-berlin.de>
+    Signed-off-by: Dan Dennedy <dan@dennedy.org>
+
+commit cb8b7bf86af003ac6eeb167305c70192c4959c7b
+Author: David Moore <dcm@acm.org>
+Date:   Sat Dec 20 19:28:01 2008 -0800
+
+    Fix stack corruption during juju lock transactions
+    
+    When performing a lock transaction (such as with fw_lock) under Juju, 4
+    bytes of the stack gets corrupted.  This is because the lock transaction
+    has 8 bytes of data sent and 4 bytes received.  Since the transaction
+    "length" is specified as 8, handle_device_event() copies 8 bytes into
+    the destination variable instead of the desired 4, and overflows into
+    the stack by 4 bytes.
+    
+    This patch fixes the corruption by adding an extra "out_length" argument
+    to the send_request() function so that both in_length and out_length can
+    be specified separately.
+    
+    Signed-off-by: Dan Dennedy <dan@dennedy.org>
+
+commit d69397ae8f3519cf291ba2efc173ad257376cf0d
+Author: Jarod Wilson <jarod@redhat.com>
+Date:   Tue Dec 9 00:08:35 2008 -0500
+
+    Fix iso_shutdown with juju firewire stack
+    
+    Make iso start/stop/start sequences on the same handle, such as those used
+    by apps such as MythTV behave as expected. I can finally watch video off my
+    cable box over FireWire using MythTV w/the juju stack now. :)
+    
+    Initially, seemed a one-liner might be the ticket (setting handle->iso.fd = -1
+    at the end of fw_iso_shutdown()), but that led to memory corruption and a
+    locked up system. What ultimately worked was essentially mimicking what the
+    old stack did to track iso state, and call fw_iso_stop() from
+    fw_iso_shutdown() as needed.
+    
+    Nb: Only lightly tested with iso receive via MythTV, but its all fairly
+    straight-forward, I think.
+    
+    Signed-off-by: Jarod Wilson <jarod@redhat.com>
+    Signed-off-by: Dan Dennedy <dan@dennedy.org>
+
+commit 0c1ddb9be2884a0f5dba37f1c20f3bdb9dab2e42
+Author: Dan Dennedy <dan@dennedy.org>
+Date:   Sun Dec 7 23:43:49 2008 -0800
+
+    Checking /dev/raw1394 and recommendation for creating it for the install make target is no longer relevant because opf firewire and udev.
+    
+    Signed-off-by: Dan Dennedy <dan@dennedy.org>
+
+commit 38a43c2736aba4a56d4d85e3980c57d8bef55e58
+Author: Stefan Richter <stefanr@s5r6.in-berlin.de>
+Date:   Sun Dec 7 14:42:02 2008 +0100
+
+    testlibraw: test raw1394_read_cycle_timer()
+    
+    Signed-off-by: Stefan Richter <stefanr@s5r6.in-berlin.de>
+    Signed-off-by: Dan Dennedy <dan@dennedy.org>
+
+commit b63022aeeb7430186d4659fcfe73070a3806df8e
+Author: Stefan Richter <stefanr@s5r6.in-berlin.de>
+Date:   Sun Dec 7 14:24:56 2008 +0100
+
+    testlibraw: test all cards instead of only the first
+    
+    Signed-off-by: Stefan Richter <stefanr@s5r6.in-berlin.de>
+    Signed-off-by: Dan Dennedy <dan@dennedy.org>
+
+commit 4904ff698d4187b49b960ff54bd714ee81893ba8
+Author: Dan Dennedy <dan@dennedy.org>
+Date:   Sun Dec 7 23:02:27 2008 -0800
+
+    Let fw_read_cycle_timer() use the local fd instead of requiring iso to be initialized
+    
+    Signed-off-by: Dan Dennedy <dan@dennedy.org>
+
+commit fbe1fa46c66d45af8fb93cf82d4d4344cc6d431b
+Author: Stefan Richter <stefanr@s5r6.in-berlin.de>
+Date:   Tue Dec 2 12:48:23 2008 +0100
+
+    [libraw1394 patch] Unify {ieee1394,fw}_bandwidth_modify()
+    
+    because they do the same.
+    
+    We only may want a separate fw_bandwidth_modify() in the future when
+    firewire-core gains a special ioctl() for that.
+    
+    (Not runtime-tested, but it looks good to me.)
+    
+    Signed-off-by: Stefan Richter <stefanr@s5r6.in-berlin.de>
+    Signed-off-by: Dan Dennedy <dan@dennedy.org>
+
+commit 788442d4031ecf06f00415e865cdd776d3c579f2
+Author: Stefan Richter <stefanr@s5r6.in-berlin.de>
+Date:   Tue Dec 2 12:39:34 2008 +0100
+
+    [libraw1394 patch] Fix raw1394_channel_modify() on firewire-core
+    (juju)
+    
+    Reported by Adrian Knoth:  fw_channel_modify() was unable to allocate
+    some channels which were actually free.
+    http://marc.info/?l=linux1394-devel&t=122818128900002
+    
+    This can be easily fixed by replacing fw_channel_modify() by
+    ieee1394_channel_modify() because this is highlevel enough to work with
+    Juju as well.  We only may want a separate fw_channel_modify() in the
+    future when firewire-core gains a special ioctl() for that.
+    
+    Also fix a documentation typo:  raw1394_channel_modify() did not show up
+    in extracted API documentation due to a cut'n'paste typo in raw1394.h.
+    
+    Signed-off-by: Stefan Richter <stefanr@s5r6.in-berlin.de>
+    Signed-off-by: Dan Dennedy <dan@dennedy.org>
+
+commit 7b8d2703525b40c743456c4bb2e129ae515c55bb
+Author: Stefan Richter <stefanr@s5r6.in-berlin.de>
+Date:   Sat Oct 18 01:25:30 2008 +0200
+
+    Fix segfault in juju's handle_arm_request
+    
+    The buffer pointers were uninitialized, leading to segfault in memcpy.
+    Bug report and initial version of the fix by Adrian Knoth.
+    
+    Signed-off-by: Dan Dennedy <dan@dennedy.org>
+
+commit 0bf8132319fe11e5d63d3757b7dcf6a8f5745400
+Author: Stefan Richter <stefanr@s5r6.in-berlin.de>
+Date:   Sat Oct 18 01:25:01 2008 +0200
+
+    Reduce nesting depth in new_handle dispatchers
+    
+    Signed-off-by: Dan Dennedy <dan@dennedy.org>
+
+commit d080bb3d83236eeb58b06dab987f4e7ed18030e0
+Author: Stefan Richter <stefanr@s5r6.in-berlin.de>
+Date:   Sat Oct 18 01:24:31 2008 +0200
+
+    Address some compiler warnings
+    
+    7x unused variable, 1x assignment used as truth value, 1x pointer signedness
+    
+    Signed-off-by: Dan Dennedy <dan@dennedy.org>
+
+commit 531b0787f1ff297f3a932f2bbe768416a8cf8cab
+Author: Erik Hovland <erik@hovland.org>
+Date:   Tue Sep 30 14:05:32 2008 -0700
+
+    Makes extra sure strings are not overrun.
+    
+    When using strncpy with the exact size of the destination string the
+    string may end up lacking null termination because the source string is
+    bigger then the destination.
+    
+    Signed-off-by: Erik Hovland <erik@hovland.org>
+    Signed-off-by: Dan Dennedy <dan@dennedy.org>
+
+commit 1e532a7f9f51fc08c5048852b31046e449002345
+Author: Erik Hovland <erik@hovland.org>
+Date:   Tue Sep 30 14:05:32 2008 -0700
+
+    Makes sure to check any return values
+    
+    The return value of any function should be checked if that function
+    uses the return value to provide some sort of status information.
+    
+    Signed-off-by: Erik Hovland <erik@hovland.org>
+    Signed-off-by: Dan Dennedy <dan@dennedy.org>
+
+commit 63b9d388208deef37cd80f5263e7316e8cbf1cb2
+Author: Erik Hovland <erik@hovland.org>
+Date:   Tue Sep 30 14:05:32 2008 -0700
+
+    Makes sure a value is returned by the function.
+    
+    A function can compile without returning something always.
+    
+    Signed-off-by: Erik Hovland <erik@hovland.org>
+    Signed-off-by: Dan Dennedy <dan@dennedy.org>
+
+commit 038f5f5c98612f637735e4f4752d8ca8108b0ef6
+Author: Erik Hovland <erik@hovland.org>
+Date:   Tue Sep 30 14:05:32 2008 -0700
+
+    Make sure that we have the right types.
+    
+    When an unsigned type is assigned a signed value, the
+    negatived value is never seen.
+    
+    Signed-off-by: Erik Hovland <erik@hovland.org>
+    Signed-off-by: Dan Dennedy <dan@dennedy.org>
+
+commit 8ad324c971a14753c35f6135fa44dfe3c1a4bf82
+Author: Erik Hovland <erik@hovland.org>
+Date:   Tue Sep 30 14:05:32 2008 -0700
+
+    Compare unsigned values instead of subtracting them.
+    
+    Unsigned values do not return signed values when subtracted
+    and the right operand is larger then the left operand.
+    
+    Signed-off-by: Dan Dennedy <dan@dennedy.org>
+
+commit 709d8791ceadae2c2a0cd3ef9ebdf56e4d7dd27e
+Author: Erik Hovland <erik@hovland.org>
+Date:   Tue Sep 30 14:05:32 2008 -0700
+
+    Protect against resource leaks.
+    
+    Signed-off-by: Erik Hovland <erik@hovland.org>
+    Signed-off-by: Dan Dennedy <dan@dennedy.org>
+
+commit 378b935fa35d9b00a36c20f8d27b489c99e1e2ef
+Author: Erik Hovland <erik@hovland.org>
+Date:   Tue Sep 30 14:05:32 2008 -0700
+
+    Make sure variables are initialized before used.
+    
+    Signed-off-by: Erik Hovland <erik@hovland.org>
+    Signed-off-by: Dan Dennedy <dan@dennedy.org>
+
+commit 6747abb0572e15e4192ce30b410536d4e6761837
+Author: Dan Dennedy <dan@dennedy.org>
+Date:   Mon Jul 21 22:01:03 2008 -0700
+
+    dispatch.c: fix a memory leak on not deleting the raw1394 wrapper handle.
+
+commit 99e9f575bfd7e0bbf24898377ffc0444604fbc2c
+Author: Dan Dennedy <dan@dennedy.org>
+Date:   Fri Jul 18 02:13:41 2008 -0700
+
+    configure.ac, Makefile.am: drop debian from build and restore doc and tools
+    to dist make target.
+
+commit e90c205d1b4c9c00d69722377ce09e2e89830883
+Author: Dan Dennedy <dan@dennedy.org>
+Date:   Fri Jul 18 01:54:38 2008 -0700
+
+    NEWS: added release notes
+    Makefile.am: use git-log to generate ChangeLog on make dist.
+
+commit 28f20b3e15537ed03a99b567b7b2ee5ab305afd1
+Author: Dan Dennedy <dan@dennedy.org>
+Date:   Fri Jul 18 01:08:30 2008 -0700
+
+    Reset the libtool age.
+
+commit 8f942654d9c2b9cd957e8e1f7eb1f29a05bbf64a
+Author: Dan Dennedy <dan@dennedy.org>
+Date:   Sun Jul 6 12:06:40 2008 -0700
+
+    Change handle validation to prevent segfault and be more informative.
+
+commit 4ce429a797a7790d5c42cb4398b54b549a01d625
+Author: Stefan Richter <stefanr@s5r6.in-berlin.de>
+Date:   Sat Jun 21 15:38:52 2008 +0200
+
+    Fix raw1394_read_cycle_timer after juju integration
+    
+    The ieee1394 version of raw1394_read_cycle_timer() fell over the cliff
+    in "First cut at integrating juju".  This brings it back and adds a juju
+    version of it.
+    
+    Also correct a typo in the inline documentation: s/get/read/
+
+commit 477b6eee6d7d2881945eb5acfc23d3930bb506b1
+Author: Philippe Troin <phil@fifi.org>
+Date:   Mon Jun 16 11:12:00 2008 -0400
+
+    Plug dir leak and initialize data structs
+    
+    While trying to track down some crashes in kino, I found the following problems
+    with libraw1394:
+    
+     * There is a DIR* leak in raw1394_set_port().
+     * Lots of data structures are not fully initialized when calling IEEE1394
+       ioctl()s.  These cause valgrind errors (benign, as valgrind does not know
+       how to interpret all ioctls.  However these also cause kino to crash in
+       libraw1394.  I've added a bunch of memset()s to prevent this problem from
+       happening.
+    
+    Forward-ported to libraw1394 git tree by Jarod Wilson.
+
+commit f9681ff59da0acca543ad5d15213c6253114f0ce
+Author: Dan Dennedy <ddennedy@ddennedy.localdomain>
+Date:   Wed Apr 30 14:37:28 2008 -0700
+
+    Move the source code files in the juju directory into the src directory and
+    give them 'fw' names instead of 'juju.'
+
+commit 3b4d2eed60f88f780393568b122164f8985088b9
+Author: Dan Dennedy <ddennedy@kino.dennedy.org>
+Date:   Tue Apr 29 23:09:22 2008 -0700
+
+    libraw1394.sgml, raw1394.h: remove information about deprecated isochronous
+    API that has been removed.
+
+commit 832c9c3d896562c369771c4b9df0abd1e2cbe116
+Author: Dan Dennedy <ddennedy@ddennedy.localdomain>
+Date:   Tue Apr 29 17:27:00 2008 -0700
+
+    juju/raw1394-iso.c: bugfix size of mmap'ed isochronous buffer to prevent
+    segfault in applications.
+
+commit 0ea462ae9895ca903c8d3134910c06e1869560c4
+Author: Dan Dennedy <ddennedy@ddennedy.localdomain>
+Date:   Wed Apr 23 17:44:36 2008 -0700
+
+    First cut at integrating juju
+    This is currently working with legacy ieee1394 and tools/testlibraw.
+
+commit 919e3999366a8a69f0ad706247004b1568d86841
+Author: Dan Dennedy <ddennedy@ddennedy.localdomain>
+Date:   Tue Apr 22 10:54:00 2008 -0700
+
+    Fix configure.ac missing fi after initial merge.
+
+commit 7c4d4970543f1829e783cc2bea2421913cc23a04
+Merge: 7c3faea 8085c63
+Author: Dan Dennedy <ddennedy@ddennedy.localdomain>
+Date:   Tue Apr 22 10:51:50 2008 -0700
+
+    Merge commit 'krh/juju'
+    
+    Conflicts:
+    
+    	configure.ac
+
+commit 7c3faea62aa9d101c1d9b7d8f570752053a0ea38
+Merge: bf7527e 342b660
+Author: Dan Dennedy <ddennedy@ddennedy.localdomain>
+Date:   Thu Mar 27 15:13:42 2008 -0700
+
+    Merge branch 'master' of dennedy.org:git/dennedy.org/libraw1394
+
+commit 342b660afa618b5b4d4e7194854fdd7895fcd1e4
+Author: ddennedy <ddennedy@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Thu Mar 27 21:32:51 2008 +0000
+
+    src/eventloop.c: redo the undo (git-svn virgin at the controls)
+    
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@179 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit bf7527e19ac289b47c709e56eda0f0ed917d4b2f
+Merge: a118281 4ce7f7d
+Author: Dan Dennedy <ddennedy@ddennedy.localdomain>
+Date:   Thu Mar 27 14:06:07 2008 -0700
+
+    Merge branch 'master' of dennedy.org:git/dennedy.org/libraw1394
+
+commit 4ce7f7d8f0e0189eff7f1b585724ef132c36c820
+Author: ddennedy <ddennedy@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Thu Mar 27 20:25:26 2008 +0000
+
+    eventloop.c: apply patch from Jonas Bonn to retrty read when failed with EINTR.
+    This can occur when libraw1394 callera receives a signal while in the read and
+    the caller is not using a signal handler set with signal().
+    
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@178 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit 8bb915dd16bfc27fa206a850e9f56439e5e424ee
+Author: ddennedy <ddennedy@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Thu Mar 27 20:25:23 2008 +0000
+
+    eventloop.c: apply patch from Jonas Bonn to retry read when failed with EINTR.
+    This can occur when libraw1394 caller receives a signal while in this read and
+    the caller is not using a signal handler set with signal().
+    
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@177 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit a118281f859d9a4e47d682da04e88c1d2f3c4ddd
+Author: Dan Dennedy <ddennedy@ddennedy.localdomain>
+Date:   Thu Mar 27 09:48:02 2008 -0700
+
+    eventloop.c: apply patch from Jonas Bonn to retry read when failed with EINTR.
+    This can occur when libraw1394 caller receives a signal while in this read and
+    the caller is not using a signal handler set with signal().
+
+commit 8085c633bce9fed1a74dd2037d7f3a95f839a4e2
+Author: Jarod Wilson <jwilson@redhat.com>
+Date:   Wed Oct 24 16:50:24 2007 -0400
+
+    Set handle->iso.packets to NULL after freeing to avoid double-frees.
+
+commit 77b6ef1f9e9f963a5e39cb844169379848a1118c
+Author: ddennedy <ddennedy@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Sun Oct 14 01:46:08 2007 +0000
+
+    fix documentation on raw1394_update_config_rom
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@175 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit 5efd221f5793ee352b28243a18a9f448b269efe7
+Author: ddennedy <ddennedy@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Sun Oct 14 01:41:30 2007 +0000
+
+    add Pieter Palmers to AUTHORS as contributor
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@174 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit ec911fc60def13d0e3d4428ac055123e43355aab
+Author: ddennedy <ddennedy@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Sun Oct 14 01:35:16 2007 +0000
+
+    update release notes
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@173 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit 78a77758c766142bb02dcc02a8aab7c331202b45
+Author: Kristian Høgsberg <krh@redhat.com>
+Date:   Wed Jun 13 18:31:59 2007 -0400
+
+    Update the juju implementation to follow the recent bitfield changes.
+
+commit c65a1c3ad8225b68165d0c751466dea1b9eccc4f
+Author: ddennedy <ddennedy@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Wed May 30 05:11:30 2007 +0000
+
+    Apply patch from Jon Schewe <jon.schewe@honeywell.com> to make valgrind happy. Adds --with-valgrind configure option.
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@172 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit fcba731c21fc7aadd952a9e5fb4f7635e64af4e8
+Author: Kristian Høgsberg <krh@redhat.com>
+Date:   Tue Apr 17 20:06:14 2007 -0400
+
+    Follow ioctl changes and header file move.
+
+commit c896d53c9932b612407c4b197d3ba1b03bfef055
+Author: Jay Fenlason <fenlason@redhat.com>
+Date:   Thu Apr 12 14:39:24 2007 -0400
+
+    Use correct payload size for two-operand lock transactions.
+
+commit 7096501f0d4d40ad4df67e250e66e3db16de2832
+Author: Kristian Høgsberg <krh@redhat.com>
+Date:   Thu Apr 12 14:11:48 2007 -0400
+
+    Use power-of-two max packet sizes.
+
+commit fb1570efbf4cb8ff4ef45937408cee43874c863a
+Author: Kristian Høgsberg <krh@redhat.com>
+Date:   Thu Apr 12 14:11:20 2007 -0400
+
+    Wrap receive tail pointer correctly.
+
+commit 194edcc9cd3ba9d451b644ed45011d9d48e9e72e
+Author: Kristian Høgsberg <krh@redhat.com>
+Date:   Wed Apr 11 18:22:36 2007 -0400
+
+    Refactor packet queueing and use for both xmit and recv.
+
+commit d9fd708f825d1781ff10f4fa8097b2794c2d0683
+Author: Kristian Høgsberg <krh@redhat.com>
+Date:   Tue Apr 3 22:10:39 2007 -0400
+
+    Fix warnings.
+
+commit 760378898f27aeeca553cf7bdfd177a24233e30e
+Author: Kristian Høgsberg <krh@redhat.com>
+Date:   Tue Apr 3 22:07:40 2007 -0400
+
+    Implement raw1394_iso_xmit_sync(), remove debug code.
+
+commit 18c6919398b63c714040f0971e98fc940bb3b32d
+Author: Kristian Høgsberg <krh@redhat.com>
+Date:   Tue Apr 3 21:23:08 2007 -0400
+
+    Handle rawiso dispositions.
+
+commit 7e50d28e8af898c2fd8eeb8c585ee5f84c0a42de
+Author: Kristian Høgsberg <krh@redhat.com>
+Date:   Tue Apr 3 21:00:06 2007 -0400
+
+    Fix xmit payload packing, use pointers for circular buffer indices.
+
+commit aa70f855b3c17b340c22417b5c7e691c77cf5d9f
+Author: Kristian Høgsberg <krh@redhat.com>
+Date:   Tue Apr 3 13:31:36 2007 -0400
+
+    Make raw1394_iso_xmit_write work.
+
+commit d9b43daf480496babdacdf9e1562397fbdac1330
+Author: Kristian Høgsberg <krh@redhat.com>
+Date:   Mon Apr 2 17:33:07 2007 -0400
+
+    More work on iso receive; handle payload wrapping.
+
+commit 89281b576730c5f440bbd539e3efb5d5ab1036bc
+Author: Kristian Høgsberg <krh@redhat.com>
+Date:   Sat Mar 31 19:45:39 2007 -0400
+
+    Decode iso headers properly.
+
+commit 429167e36a4ebb994c838eaf44b7cfb7571cdf4b
+Author: Kristian Høgsberg <krh@redhat.com>
+Date:   Wed Mar 28 22:55:21 2007 -0400
+
+    Get rawiso receive a little closer to working.
+
+commit 5659d28c2de4a3b7ca1b9a77d847478303475996
+Author: Kristian Høgsberg <krh@redhat.com>
+Date:   Mon Mar 26 16:49:12 2007 -0400
+
+    Add the juju support work so far.
+
+commit 1f1549c6adabcf7cf3685d7aca8f3f216e2f3f00
+Author: ddennedy <ddennedy@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Sat Feb 17 02:30:13 2007 +0000
+
+    add documentation about existence of RAW1394DEV
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@171 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit 4a129dd960eab819d7f87fc83c0afc2b938fb1cf
+Author: ddennedy <ddennedy@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Sat Feb 17 02:24:16 2007 +0000
+
+    add support for RAW1394DEV environment variable to override default /dev/raw1394, but also attempt to failover to default.
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@170 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit fa981a8b96ec3d09385a0b14b4342e574b7bbe29
+Author: ddennedy <ddennedy@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Wed Feb 14 05:29:18 2007 +0000
+
+    added raw1394_read_cycle_timer, contributed by Pieter Palmers
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@169 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit 3a35307a853a627c9faab68071623f94f6c90dbf
+Author: ddennedy <ddennedy@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Tue Oct 17 03:39:37 2006 +0000
+
+    bugfix segfault in raw1394_iso_shutdown on no iso activity due to not initializing raw1394_handle.iso_packet_infos to NULL in raw1394_new_handle
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@168 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit e4e2330837d677d5400b4669142d127ced36c4c3
+Author: ddennedy <ddennedy@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Tue May 9 04:27:38 2006 +0000
+
+    apply optimization patch from Pieter Palmers that removes modulo operator from high frequency isochronous code
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@167 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit 45503d30d39110d54b4a95d7bc18d793042dd3bb
+Author: ddennedy <ddennedy@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Sun Apr 9 02:25:22 2006 +0000
+
+    cleanup some compiler warnings
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@165 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit e5d5603758ae9f4d04e3ac3ed0f2b966be329475
+Author: ddennedy <ddennedy@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Sun Apr 9 02:18:47 2006 +0000
+
+    add release notes
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@164 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit 0b0ad6b10e1667571f97bd8f2e73b35359f4b5ef
+Author: ddennedy <ddennedy@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Sun Apr 9 02:13:44 2006 +0000
+
+    lock allocated isochronous packet tracking memory
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@163 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit 9c74e4a2956e38045b825e43e1a4b7ba1620dfc2
+Author: ddennedy <ddennedy@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Sun Apr 9 01:26:41 2006 +0000
+
+    remove memory allocations for isochronous operations from the libraw1394 event loop to make them more respectful of realtime applications
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@162 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit 96aaa4ca65d7ff51089ebb87dbb3303737735e9d
+Author: ddennedy <ddennedy@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Sat Mar 4 01:17:46 2006 +0000
+
+    Added a new callback response for iso_xmit handlers: RAW1394_ISO_AGAIN.
+    This would be returned when the callback doesn't have enough data to
+    create a complete packet. This can occur when the xmit buffers are
+    bigger than the buffers supplying the data. It is not nescessarily an
+    error, because there are enough packets in the xmit buffer. This
+    response could give the data supplyer more time to fill the intermediate
+    buffer without losing any packets.
+    
+    Signed-off-by: Pieter Palmers <pieterp@joow.be>
+    Signed-off-by: Dan Dennedy <dan@dennedy.org>
+    
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@161 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit a51052f41b164c285f91f4b48724e1fc2d125637
+Author: ddennedy <ddennedy@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Mon Jul 4 04:04:22 2005 +0000
+
+    Fix raw1394_iso_xmit_write() to work with recent kernel change to raw1394
+    to fix bug with stalling on buffer underrun.
+    
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@160 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit 19065515152718407db849b0be71a8eeee80deaa
+Author: ddennedy <ddennedy@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Mon Jul 4 03:00:50 2005 +0000
+
+    add sanity check to queuing of packets in rawiso xmit
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@159 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit 87941d01c4188cc63f0e99c229b568164ad922bf
+Author: ddennedy <ddennedy@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Fri Jul 1 04:12:47 2005 +0000
+
+    Add a comment that libraw does not allocate channels and bandwidth. This
+    is already mentioned in doc/libraw1394.sgml but an existing comment about
+    raw1394_iso_xmit_init may be misleading.
+    
+    Signed-off-by: Stefan Richter <stefanr@s5r6.in-berlin.de>
+    
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@158 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit 202b68ef5b03f6dd68cd21dc15eb7a000d3f1160
+Author: ddennedy <ddennedy@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Thu Jun 23 17:09:33 2005 +0000
+
+    bugfix stalling on iso transmission underflow
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@156 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit 1c06177cd72803ad2b0cf6825b6bd043511fdb8b
+Author: ddennedy <ddennedy@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Thu Jun 2 18:30:57 2005 +0000
+
+    documentation and header comment corrections from Stefan Richter
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@155 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit 246f623e3565912a8b407108524e02dfae547855
+Author: ddennedy <ddennedy@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Wed Feb 16 16:54:58 2005 +0000
+
+    add functions for allocating and releasing bandwidth and channels
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@154 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit 9d07aaadda67c3a435afd18ef40a8ebac9c078d8
+Author: ddennedy <ddennedy@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Fri Nov 26 16:30:44 2004 +0000
+
+    add comment about assumptions made in raw1394_get_port_info
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@152 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit 3de7e65109612eadb60dcb227b1a9fd2e18f6285
+Author: ddennedy <ddennedy@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Thu Nov 25 18:46:29 2004 +0000
+
+    apply patch from Matthias Hanel to fix uninitialized buffer and remove unncessary (and logically impossible) copy in get_port_info
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@151 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit 942638f8beb9d9ef7cf1f1f9d2199db3df4d6e57
+Author: ddennedy <ddennedy@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Thu Nov 25 18:01:57 2004 +0000
+
+    improve reference documentation
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@150 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit 4276e9ee3cec7814c4f82edd3836a67569cbaf30
+Author: ddennedy <ddennedy@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Sat Nov 20 04:56:36 2004 +0000
+
+    pkgconfig include path should not contain libraw1394
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@149 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit a07ba8cee953e55ac64421eea5806326235b819f
+Author: ddennedy <ddennedy@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Fri Nov 19 02:15:15 2004 +0000
+
+    bump version of isodump file
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@148 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit eb9b08bd5ca698bc3dba386f11dbc043b2ca6390
+Author: ddennedy <ddennedy@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Thu Nov 18 05:24:13 2004 +0000
+
+    port iso examples to rawiso API
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@147 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit d5902a87154841ea71398a013f50569be2f4d3aa
+Author: ddennedy <ddennedy@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Thu Nov 11 03:49:07 2004 +0000
+
+    fix version and copyright in docs
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@146 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit c9d504c17cb5783c6d1b7c295fe255af09fc65e4
+Author: ddennedy <ddennedy@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Thu Nov 11 03:31:20 2004 +0000
+
+    remove m4, remove -O2 from CFLAGS
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@145 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit 940fabaf397c9bc9b6b5457bab45ef9913513248
+Author: ddennedy <ddennedy@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Thu Nov 11 03:19:09 2004 +0000
+
+    reorganize and update documentation; fix compiler warning
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@144 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit dbfde4f174f04b925cc445447f3ed7347918c2b1
+Author: ddennedy <ddennedy@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Sun Oct 31 01:06:20 2004 +0000
+
+    revert kernel protocol version
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@143 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit c97bb4d5e64ab710bcd1f3ae6bfee3e4a9f31e85
+Author: ddennedy <ddennedy@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Sun Oct 31 00:52:28 2004 +0000
+
+    fix make dist without doc
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@142 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit e0722bf46c73ed276887dc8ea2625754930ff269
+Author: ddennedy <ddennedy@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Sat Oct 30 22:56:25 2004 +0000
+
+    nother doc update
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@141 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit ff3c421f8dbdb581448b63316009668d1bc277f5
+Author: ddennedy <ddennedy@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Sat Oct 30 22:49:27 2004 +0000
+
+    bump versions, build fixes, and doc updates
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@140 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit 6b2bee6acac040b9a7ff7a2856a2789f1fb5f98a
+Author: bencollins <bencollins@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Tue Dec 9 01:47:45 2003 +0000
+
+    Patch from Jim Radford. Other half of packet_per_buffer ABI cleanup.
+    
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@139 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit 8fa3c9874b4d3315229495ae9c8077bf2260807a
+Author: bencollins <bencollins@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Thu Nov 20 15:47:03 2003 +0000
+
+    Patch from Alexander Neundorf to support differing ISO rx modes. Currently
+    supported only by OHCI.
+    
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@138 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit ff891d604be4d6bb8e7de134292c3246002d42aa
+Author: weihs <weihs@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Sun Nov 9 19:46:20 2003 +0000
+
+    sync with driver
+    (addition of functions raw1394_arm_get_buf raw1394_arm_set_buf to get and set buffers of mapped address ranges)
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@137 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit 30030e14aabf0fe5e5c35606d906e5fac28c5d03
+Author: weihs <weihs@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Sun Nov 9 19:44:11 2003 +0000
+
+    sync with driver version of this file
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@136 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit c4e056e164fde1ae8c178fca974d1807ad4eaa4d
+Author: bencollins <bencollins@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Tue Oct 7 13:28:07 2003 +0000
+
+    Patch from Alexander Neundorf to add proto for raw1394_iso_recv_flush()
+    
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@135 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit c412fe45d29134ca1599b69a34baf496a98a7963
+Author: bencollins <bencollins@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Fri Sep 26 13:55:47 2003 +0000
+
+    Update for new version, 0.10.1.
+    
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@133 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit 0072343aabd43e23d8ce4ba255afbc4622a1da64
+Author: bencollins <bencollins@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Fri Sep 26 13:51:31 2003 +0000
+
+    Fixup async_stream to use same local req variable for reentrancy.
+    
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@132 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit 2e8ba91c51c7777054b93483586403ed59a4983b
+Author: bencollins <bencollins@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Fri Sep 26 13:35:59 2003 +0000
+
+    Fix postinst so device node gets created.
+    
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@131 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit e89e0feee45595f045d01ad845079dc035dfc165
+Author: bencollins <bencollins@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Thu Sep 11 02:47:22 2003 +0000
+
+    Async stream support from Jim Radford.
+    
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@130 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit 2d36fc10b27b05f5f49fd9a1c9ae0eb9b04302d3
+Author: bencollins <bencollins@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Tue Jul 22 15:02:12 2003 +0000
+
+    Increase so maj/age so account for new recv-flush call.
+    
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@129 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit ec749d4a021095ff680a927d4a996b051468bc6a
+Author: bencollins <bencollins@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Tue Jul 22 14:54:19 2003 +0000
+
+    Patch from Stephen Tiedemann to allow reentrancy in raw1394's usage of
+    raw1394_request's.
+    
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@128 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit ce14ef3b9e73da3ddc62c286d1ef41637d798c6b
+Author: bencollins <bencollins@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Thu Jul 17 17:33:39 2003 +0000
+
+    Patch from Dan Maas to add raw1394_iso_recv_flush() call to API, using the
+    RAW1394_IOC_ISO_RECV_FLUSH ioctl. Updated the ieee1394-ioctl.h file
+    aswell.
+    
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@127 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit 531c6b405c41fb670d5af1cf93b2f6ded3e2c5c1
+Author: bencollins <bencollins@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Thu Jul 17 17:28:56 2003 +0000
+
+    pkg-config support from Kristian Hogsberg.
+    
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@126 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit 441945b498c9f5698125499e99f86c5c8ad0222d
+Author: bencollins <bencollins@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Thu Jul 17 17:26:09 2003 +0000
+
+    Remove trailing whitespace, which automake chokes on.
+    
+    Patch from Manish Singh.
+    
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@125 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit bfc01aa141bfc556c8a77ddc7ceecc305036bda2
+Author: bencollins <bencollins@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Sun Jul 13 05:34:30 2003 +0000
+
+    Fixed section for -dev package.
+    
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@124 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit 85a071ce64f2999082c8e8fb6797a6429b9f5ec2
+Author: bencollins <bencollins@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Sun Jul 13 01:45:05 2003 +0000
+
+    Re-add the pdf build
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@121 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit f2f611bb614a0787def0dd2d46a4d46373909505
+Author: bencollins <bencollins@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Sun Jul 13 01:40:37 2003 +0000
+
+    Update Debian files.
+    
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@120 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit 1688f1a129fba3f5a3e06c5a7301b067d5052887
+Author: bencollins <bencollins@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Sun Jul 13 01:37:14 2003 +0000
+
+    Ok, the Debian package was way out of sync with upstream
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@119 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit 27d115782e482e5b74c32fa0ec6234582c8baf97
+Author: bencollins <bencollins@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Sun Jul 13 01:27:13 2003 +0000
+
+    Ooops...libtool works a bit different than I thought, but atleast it works
+    like it is supposed to.
+    
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@117 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit f0703dde00663f53833d289109e986dae5522f2a
+Author: bencollins <bencollins@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Sun Jul 13 01:12:19 2003 +0000
+
+    Generate and install the pdf in the Debian package.
+    
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@114 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit 645149446840e65da837bf7675bef647157cdb96
+Author: bencollins <bencollins@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Sun Jul 13 01:10:35 2003 +0000
+
+    Don't run configure at the end of autogen.sh. Also, remove autom4te.cache.
+    
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@113 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit a81dbc71a1d4c2c58e6c074244f407feda31add1
+Author: bencollins <bencollins@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Sun Jul 13 01:01:13 2003 +0000
+
+    Update Debian maintainer
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@112 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit c8229bb259def2dc6e4adff01cbb9a5b37e350fb
+Author: bencollins <bencollins@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Sun Jul 13 00:52:39 2003 +0000
+
+    Update Debian changelog.
+    
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@111 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit f119e20e1c880f5325eed319deab17f9bc014a8e
+Author: bencollins <bencollins@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Sun Jul 13 00:52:28 2003 +0000
+
+    File doesn't really seem needed. The NEWS file gives a good overview, and
+    the svn log is more than verbose enough for info seekers.
+    
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@110 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit 22487936468d60ee02b3f7ad83506dc3a903cb2e
+Author: bencollins <bencollins@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Sun Jul 13 00:49:54 2003 +0000
+
+    Fix compiler warnings.
+    
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@109 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit f149163899e34d223d8a88b314de837fedb8106d
+Author: bencollins <bencollins@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Sun Jul 13 00:26:14 2003 +0000
+
+    Updates from 0.10.0 release.
+    
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@108 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit a3d9ca56040e35c0b79aa3b4bb804ae965ab6416
+Author: ddennedy <ddennedy@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Wed Apr 23 04:31:28 2003 +0000
+
+    add libtoolize to bootstrap
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@107 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit 61b27fc2e4011d3d303f8f062a3fc37e446c8dc9
+Author: ddennedy <ddennedy@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Mon Apr 21 17:01:41 2003 +0000
+
+    added Dan Maas' rawiso docs
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@106 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit 2ed48152b02a273b899d6a8fb562d949aa5121b8
+Author: dmaas <dmaas@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Mon Apr 7 22:23:20 2003 +0000
+
+    new_handle_on_port() error path fix from Jim Radford
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@105 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit 081780c175c6fbcd706ebf37275ae698f3f5b3e9
+Author: dmaas <dmaas@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Wed Mar 26 22:48:46 2003 +0000
+
+    add raw1394_new_handle_on_port() convenience function
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@104 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit e753a09b3831ab3f4f1d320d8ec18d4a0c4a0229
+Author: bencollins <bencollins@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Sat Feb 22 04:31:28 2003 +0000
+
+    Updates for new rawiso ioctl interface.
+    
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@103 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit 2ecf31c96d7a1dac61188c247ca7fe6a65e6b578
+Author: dmaas <dmaas@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Wed Jan 15 13:14:47 2003 +0000
+
+    add iso_xmit_sync() and iso_xmit_write(); clean up iso handling a bit
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@102 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit e6e6375ceeef247586113cd8a39ea3e2f2124338
+Author: dmaas <dmaas@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Wed Jan 15 06:36:19 2003 +0000
+
+    implement tag matching for rawiso reception
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@101 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit ce3cc1bd34bb2f450b231ffc92765f88d3422cad
+Author: dmaas <dmaas@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Mon Jan 6 04:08:00 2003 +0000
+
+    back out previous commit - don't drop the legacy API just yet
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@100 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit 5bb327dc9030acfdc281583f1b1bc67380c04cbc
+Author: dmaas <dmaas@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Sun Jan 5 20:58:19 2003 +0000
+
+    emulate legacy ISO reception API on top of new rawiso API
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@99 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit 385413d23e8efab86d391bfa09776bfbdbab30ff
+Author: dmaas <dmaas@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Tue Dec 24 03:01:11 2002 +0000
+
+    update iso API for multi-channel reception and new packet buffer layout
+    
+    
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@98 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit 1dd7ffd1c84054ec61c0609403228d09ca8e0b23
+Author: anonymous <anonymous@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Fri Dec 20 07:37:47 2002 +0000
+
+    oops, irq_interval needs to be signed
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@97 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit 81c7e9949919963483b1af1426eb64e84cbb2f29
+Author: anonymous <anonymous@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Fri Dec 20 07:26:18 2002 +0000
+
+    dmaas - renamed exported arm definitions into the raw1394_ namespace; brought kernel-raw1394.h back in sync with the kernel version
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@96 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit e01decd75c1455c9fb018494d73ee77928f12ba6
+Author: dmaas <dmaas@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Mon Dec 16 05:11:45 2002 +0000
+
+    rawiso updates:
+    - changed return type of rawiso xmit/recv handlers from int to
+      enum raw1394_iso_disposition
+    
+    - added an ioctl (RAW1394_ISO_QUEUE_ACTIVITY) to force an ISO_ACTIVITY
+      event into the queue. This is needed for handling RAW1394_ISO_DEFER,
+      to kick us out of the next read() instead of sleeping forever.
+    
+    - removed references to "8-byte" isochronous header - this is an
+      OHCI-specific implementation detail
+    
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@95 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit 45112de2253ab0d489ec7a45d3ba1e9cc123b2ab
+Author: ddennedy <ddennedy@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Mon Nov 18 15:30:52 2002 +0000
+
+    fix cplusplus extern C block
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@94 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit b9de121a85abef26f07da8d55530964eb9797f17
+Author: ddennedy <ddennedy@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Mon Nov 18 07:40:21 2002 +0000
+
+    merged rawiso branch
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@93 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit 9d2badbe76f918c99778bb1c362f988c0172f9fe
+Author: ddennedy <ddennedy@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Wed Oct 23 21:22:22 2002 +0000
+
+    added missing arm.c from weihs branch
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@86 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit 915a20a96f6fb81249f140a114b94f2b1502149d
+Author: ddennedy <ddennedy@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Wed Oct 23 21:18:49 2002 +0000
+
+    merged weihs branch
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@84 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit 1673eadd82cc43e9ab54d13dea2231d0798e1c4e
+Author: aeb <aeb@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Sun Oct 13 23:59:46 2002 +0000
+
+    configure.ac:
+    - Move configure.in to configure.ac (for autoconf 2.50+).
+    - Set CFLAGS to "-Wall -O2" only if not in environment already.
+    - Set package version to 1.0.0 already.
+    
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@82 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit b0332cb93ee9079951ddc8b6a2c77904e0ee051c
+Author: aeb <aeb@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Sun Oct 13 22:54:49 2002 +0000
+
+    Add kernel-doc style documentation headers for most exported functions.
+    
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@81 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit 34a1c53427ba6b011fa2635102c2d125ddbe61c0
+Author: aeb <aeb@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Tue Oct 8 01:52:45 2002 +0000
+
+    Set the executable flags for autogen.sh and debian/rules that were lost in the
+    CVS to SVN conversion.
+    
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@80 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit 4c165f62dbd1d7bb882eea3f1dfa1f43df62701c
+Author: aeb <aeb@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Wed Aug 1 12:30:48 2001 +0000
+
+    Add raw1394_get_local_id, _irm_id, _nodecount refentry.
+    
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@73 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit 17167ea970a4ad600615f1dbfe7ea9e89493d735
+Author: aeb <aeb@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Mon Jul 9 00:27:09 2001 +0000
+
+    Reworked some paragraphs.
+    Added chapters on generation numbers and error codes.
+    Added some function reference entries.
+    
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@72 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit 4fb2fadb90f96613d17b297a758817f15b9f0459
+Author: aeb <aeb@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Wed Jun 27 15:29:07 2001 +0000
+
+    Modify info in Debian package copyright file a bit.
+    
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@71 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit b0804b836ef473112a3cf7c5391cd47180be1beb
+Author: aeb <aeb@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Wed Jun 27 12:14:20 2001 +0000
+
+    Fix wrong error mapping in raw1394_error_to_errno() on local transactions.
+    
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@70 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit c4b02997543e154b3301a65b0204d9e7e3b9fc48
+Author: aeb <aeb@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Sun Jun 17 15:19:20 2001 +0000
+
+    debian: Let postinst continue even if input is /dev/null.
+    debian: 0.9.0-2 release for the above.
+    Fix mixed up sections for isodump man file in doc/Makefile.am and
+     configure.in.
+    
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@69 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit 609968669979823f0b2fdf08b43eab8e38f8dec6
+Author: aeb <aeb@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Mon Jun 11 11:23:00 2001 +0000
+
+    Added man page describing format of the iso dump file.
+    
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@68 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit e8e99d1b9fc62ca71585cdcda97dcaf407f0017f
+Author: aeb <aeb@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Fri Jun 8 18:25:31 2001 +0000
+
+    Forgot to add dumpiso and sendiso man pages to repository, fixed.
+    
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@67 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit 135babee19a43abe7fb48cddf334473de0322643
+Author: aeb <aeb@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Fri Jun 8 00:31:12 2001 +0000
+
+    Moved testlibraw.c from src to tools directory.
+    Added sendiso and dumpiso programs in tools directory.
+    Added man pages for sendiso and dumpiso in doc directory.
+    
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@66 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit b6d807e7ac64580d0c3e1f2465cd11968c5311bb
+Author: aeb <aeb@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Wed May 30 10:54:25 2001 +0000
+
+    debian: Remove a now useless substvar.
+    
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@65 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit 9c886e6e8786b1ace63496b48efcce4619d48509
+Author: aeb <aeb@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Mon May 28 16:13:48 2001 +0000
+
+    debian: Make shlibs file versioned.
+    debian: Remove local shlib dependency kludge and replace with -l option for
+     dh_shlibdeps.
+    
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@64 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit 1bcacfa385890f05646c359906cb21488fb66afe
+Author: aeb <aeb@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Fri May 25 01:02:22 2001 +0000
+
+    Revert move of HTML directory from libraw1394 to libraw1394.html
+    
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@63 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit 203f7092c092f64aba6035cd68e7e6fad2b13f29
+Author: aeb <aeb@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Fri May 25 00:44:14 2001 +0000
+
+    Revert move of HTML directory from libraw1394 to libraw1394.html
+    
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@62 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit 70cfc9c2968b096e7ba5a9507ea020920d878a35
+Author: aeb <aeb@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Thu May 24 22:10:45 2001 +0000
+
+    Move HTML formatted documentation subdir from libraw1394 to libraw1394.html.
+    Update Debian control files to generate version 0.9.0-1 package.
+    
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@61 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit e02dee488a2c3c3ea8374e7bd49e59176eab32dd
+Author: aeb <aeb@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Mon May 14 01:05:58 2001 +0000
+
+    Handle generation number is not automatically advanced with bus reset.
+    Function raw1394_update_generation() added for manual update.
+    Bus reset handler get current generation number as argument.
+    Default bus reset handler calls raw1394_update_generation().
+    
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@60 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit fdc1945dabaca07a9f2d5cf97d845f6fb3be58da
+Author: aeb <aeb@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Mon May 14 00:57:05 2001 +0000
+
+    Fix macros so that they actually work.
+    
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@59 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit 8009101f3818d560a2f48c9dad18f8d7a2a87ae3
+Author: aeb <aeb@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Mon May 7 00:03:03 2001 +0000
+
+    Fix Makefile.am to include libraw1394.m4 in distribution.
+    Update NEWS.
+    Some Debian packaging updates.
+    
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@58 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit 4a0caac05bd9ee2b9f55b1c9c9360230128afa6b
+Author: aeb <aeb@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Wed Mar 21 02:00:03 2001 +0000
+
+    Store returned generation count after setting of port.
+    
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@57 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit 08e27dd37f3d3237253a2ef9686a56193646c5e6
+Author: aeb <aeb@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Wed Feb 28 16:24:38 2001 +0000
+
+    Install libraw1394.am.
+    Fix wording in message when /dev/raw1394 not found.
+    
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@56 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit d64c821b1497d3368f24065b91c87ba7dc0955fd
+Author: aeb <aeb@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Wed Feb 28 01:21:15 2001 +0000
+
+    testlibraw gets installed now.
+    Added man page for testlibraw.
+    
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@55 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit 900ef48d4a6ed39cea5028939eb8eeeee17c6a67
+Author: aeb <aeb@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Tue Feb 27 23:44:08 2001 +0000
+
+    Let received iso header be big endian, to be consistent.
+    
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@54 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit 6fc01c2077f0ecbfdaa4dbfc4c4759f07161d009
+Author: aeb <aeb@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Mon Feb 5 02:38:03 2001 +0000
+
+    Add libraw1394 autoconf macro (not yet complete).
+    Add functions and symbols to let macro determine version.
+    
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@53 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit de323c43386b10345d16f50bb9077b352f46786f
+Author: aeb <aeb@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Wed Jan 31 23:38:15 2001 +0000
+
+    Put 'extern "C"' for C++ back in.
+    
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@52 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit 87fb0bfc7831ea1d7a9825700a9f207f3abce4e3
+Author: aeb <aeb@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Sat Jan 27 02:28:29 2001 +0000
+
+    Adapted testlibraw to new style error handling.
+    
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@51 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit 90502a21ba57e221f610f6a6c2007310c5fec458
+Author: aeb <aeb@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Fri Jan 19 01:19:04 2001 +0000
+
+    Fix building errors.c.
+    
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@50 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit e6015ce5e9be81881102e33ed3139fc11bb233cc
+Author: aeb <aeb@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Fri Jan 19 01:11:48 2001 +0000
+
+    First implementation of new error reporting API.
+    
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@49 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit 2b61e222eaf0e0260ee2d5d5865a4275d906000d
+Author: aeb <aeb@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Thu Jan 4 02:06:30 2001 +0000
+
+    Fix misplaced device file in Debian installation.
+    
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@48 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit 8e5e0b811305d444266cb55fc4b7c9bca0c65231
+Author: aeb <aeb@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Tue Dec 12 00:28:06 2000 +0000
+
+    Debian scripts use makedev (>=2.3.1-49) in postinst by default now.
+    Postinst script using mknod added as alternative.
+    Revision bumped up to 0.8.1.
+    
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@47 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit c7d326137ecd2e53d531ef3cc9abf1c8954cd4ab
+Author: aeb <aeb@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Sat Nov 25 02:05:35 2000 +0000
+
+    Fix postinst ldconfig.
+    Fix device file creation.
+    Install NEWS and README as documentation in the dev package.
+    
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@46 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit 02154eb2c252536c0d80bec7f48602e886e1b2de
+Author: aeb <aeb@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Sat Nov 25 01:58:34 2000 +0000
+
+    Add some information about return values.
+    
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@45 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit f1b4b5e18fe07a2c8418f5382cc753c11d426208
+Author: aeb <aeb@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Fri Nov 24 01:11:24 2000 +0000
+
+    Bump up version numbers for release.
+    
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@44 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit 670ce6c77a1a884cb8002e13cff380909dada3bc
+Author: aeb <aeb@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Fri Nov 24 01:03:43 2000 +0000
+
+    Added libraw1394.postinst.in to list of distributed files.
+    
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@43 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit 0966e80dce18c948225fe6b739c879809bc07b78
+Author: aeb <aeb@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Thu Nov 23 22:55:47 2000 +0000
+
+    Add ldconfig in deb postinst for Debian policy conformance.
+    
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@42 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit 3416e8f91ae32f4ddd09a5f2de822e8babc7e5ca
+Author: aeb <aeb@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Thu Nov 23 17:42:12 2000 +0000
+
+    Removed acconfig.h, which wasn't needed for some time.
+    
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@41 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit e656d9f2f6c50bf3a17c67da7e0d131ff7f94302
+Author: aeb <aeb@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Wed Nov 22 23:12:56 2000 +0000
+
+    Added ieee1394.h header.
+    
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@40 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit aa2c8b55b3f91767cc7d47b56d4f539ff7dc5019
+Author: aeb <aeb@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Wed Sep 13 23:24:53 2000 +0000
+
+    Fix raw1394_start_iso_write() which uses wrong variable.
+    
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@39 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit d93e0e84c97cebac079f70fff8dc89159f3b98dd
+Author: aeb <aeb@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Sun Sep 10 22:18:49 2000 +0000
+
+    Work around compiler warnings for int/ptr casts.
+    
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@38 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit bbfc1944cd33de7056dc9617f9d9a977978032fa
+Author: aeb <aeb@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Sun Sep 10 02:10:08 2000 +0000
+
+    Added control files for Debian packages.
+    
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@37 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit a0c8e92cf49f8edbdb05eb1720545b2161561a04
+Author: aeb <aeb@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Fri Sep 1 15:15:57 2000 +0000
+
+    Added missing prototypes for iso send functions.
+    
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@36 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit 1a91281532f25b2109b02d5560d1c4605dd20183
+Author: aeb <aeb@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Tue Aug 8 00:29:08 2000 +0000
+
+    Added raw1394_get_irm_id().
+    
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@35 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit 6ac98fd9fd300bc1b8969b6e7a4cf251fa85cdd4
+Author: aeb <aeb@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Sun Aug 6 02:44:00 2000 +0000
+
+    Added support for isochronous sending.
+    
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@34 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit c1e3916f704c82bfe6591ffd049c24015a8d1656
+Author: aeb <aeb@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Wed Jul 5 20:40:51 2000 +0000
+
+    Added raw1394_reset_bus() call.
+    
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@33 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit 270561f3887360d242c2b0af3fb4717f4668cace
+Author: aeb <aeb@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Thu Jun 22 16:22:00 2000 +0000
+
+    - Set library version info in configure.in, use in src/Makefile.am.
+    - Enable compiler warnings.
+    
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@32 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit bf80f4a16a800c4d6b6fe3b8362d72dc1eb30361
+Author: aeb <aeb@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Thu Jun 15 22:28:22 2000 +0000
+
+    Update libtool version number.
+    
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@31 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit eb0f7d95973d0153c22034a82ceceb1da6d54fa4
+Author: aeb <aeb@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Wed Jun 14 15:01:42 2000 +0000
+
+    Added copyright headers.
+    
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@30 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit 41253c06857018423d97d88a9553d25bda873b1d
+Author: aeb <aeb@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Sun Jun 11 17:48:43 2000 +0000
+
+    Added explicit AC_PROG_INSTALL call.
+    
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@29 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit 09f008620fd0e2f0c3e7a88e5bc26260023a055d
+Author: aeb <aeb@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Fri Jun 9 13:02:13 2000 +0000
+
+    Fix size of error field.
+    
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@28 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit 3b8b4c0ae94ef59182304990c38c20076a01f6a8
+Author: aeb <aeb@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Fri Jun 2 17:03:00 2000 +0000
+
+    Modified support for 32/64 bit environments, control struct fields have fixed size now.
+    
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@27 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit 8942a29ac1c6b575e0eb93d903097be60c2276e2
+Author: aeb <aeb@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Sun May 28 21:00:56 2000 +0000
+
+    Added support for environments with 64 bit kernel and 32 bit userland.
+    
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@26 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit 8dd13e50825cdcee062d4dba43afa62c292d465f
+Author: aeb <aeb@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Thu Apr 27 01:09:52 2000 +0000
+
+    Fixed missing setting of ext code in raw1394_start_lock()
+    
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@25 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit 9812e4136b6c88978cc47605da9d660a355ea009
+Author: aeb <aeb@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Sat Apr 15 00:33:26 2000 +0000
+
+    Fixed lock transaction to actually return response value.
+    
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@24 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit 8aa036c3f403a2076873cbd1fbe97a221d1ccca0
+Author: aeb <aeb@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Wed Apr 12 23:27:26 2000 +0000
+
+    Add userdata functions as news.
+    
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@23 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit 47a2d6953a832792b9807745657903a888c31978
+Author: aeb <aeb@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Wed Apr 5 22:41:31 2000 +0000
+
+    Add userdata functions.
+    
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@22 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit d6827eb927e9a420e316788f57ac954b5c8b6664
+Author: aeb <aeb@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Sat Mar 18 04:13:00 2000 +0000
+
+    Bump version number to 0.6.
+    
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@21 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit d0717fb53e1f84f0b6416dec4b329ddb213eb47c
+Author: aeb <aeb@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Sat Mar 18 04:05:48 2000 +0000
+
+    Mention byte order change.
+    
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@20 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit 95865bca4f88ee080748a5f38057c2336e666522
+Author: aeb <aeb@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Sat Mar 18 04:00:35 2000 +0000
+
+    Mention SourceForge home.
+    
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@19 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit 6a6b9d48887027c19e75564f84664598f5e56199
+Author: aeb <aeb@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Sat Mar 18 02:14:43 2000 +0000
+
+    Add script to generate Makefiles from bare CVS checkout.
+    
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@18 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit 1b040714aea5266da20aa66637a1e94727a5dae9
+Author: aeb <aeb@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Fri Mar 17 02:15:23 2000 +0000
+
+    Version++ and age++ for libtool version info.
+    
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@17 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit c9ffcda2e2520d1080f7caeac7047ada7a1745d5
+Author: aeb <aeb@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Thu Mar 16 22:32:49 2000 +0000
+
+    - Added FCP monitoring entry
+    - Added old 0.5 news
+    
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@16 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit bd7a5606d22c5d0a30d4dc692f60112053c5453e
+Author: aeb <aeb@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Thu Mar 16 22:22:05 2000 +0000
+
+    Added FCP monitoring test.
+    
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@15 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit 106b50af9da6feb2bdfa68f87f203deb6a7f5836
+Author: aeb <aeb@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Thu Mar 16 21:22:28 2000 +0000
+
+    Use correct typedef in my_tag_handler().
+    
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@14 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit d6015263bea185d43906729dd676fd790636ac34
+Author: aeb <aeb@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Thu Mar 16 03:59:53 2000 +0000
+
+    Fix spelign of raw1394_set_fcp_handler().
+    
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@13 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit 227464b31ce04e1ceba51067b500ebbe54b2c08f
+Author: aeb <aeb@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Thu Mar 16 03:40:52 2000 +0000
+
+    Added FCP listen functionality.
+    
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@12 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit 5adfa6bf749a0a040a0973f318f4de256fb5b1a6
+Author: aeb <aeb@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Thu Mar 16 03:16:18 2000 +0000
+
+    Removed obsolete AC_PROG_RANLIB.
+    
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@11 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit 616a622b699397dfdf42c361cd54f8122e508303
+Author: aeb <aeb@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Sun Mar 12 04:08:48 2000 +0000
+
+    Ensure this ends up in distributions.
+    
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@10 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit 51b856d8c649477bd749e08815b7275c26b30698
+Author: aeb <aeb@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Sun Mar 12 03:59:45 2000 +0000
+
+    Renamed 'new' args to 'new_h' for C++ compatibility.
+    
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@9 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit dca3a5a3d39a716fe50f2decab10f16fedf59877
+Author: abombe <abombe@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Sun Feb 6 16:49:29 2000 +0000
+
+    Version changed to 0.5
+    
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@8 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit c4d75933cb2a8e3fcd396ea78b869a2f2c6b4234
+Author: abombe <abombe@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Sun Feb 6 15:10:14 2000 +0000
+
+    Added lock transaction.
+    
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@7 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit 9eb8df1247c1f573e9c28644a2457d89ddc0459d
+Author: abombe <abombe@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Fri Feb 4 23:20:17 2000 +0000
+
+    Changed iso rcv handling to separate handlers per channel.
+    
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@6 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit 7ba9a4696900f930061c50785c80f77bd8522842
+Author: abombe <abombe@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Sun Jan 2 21:55:08 2000 +0000
+
+    Added dev target to Makefile
+    
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@5 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit 04f65912c3c04161daee655136d8d74d3763da16
+Author: abombe <abombe@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Wed Dec 29 22:24:32 1999 +0000
+
+    Added isochronous I/O support
+    
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@4 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit eb99eec7ab20c9b0fc2d9a60359fac89e85f33bd
+Author: abombe <abombe@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Sat Dec 18 16:02:15 1999 +0000
+
+    - Added FCP register addresses
+    - Added #ifdef for multiple inclusion
+    
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@3 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit 48ef2e94756a69fab5f30a01c905d2c7c4383a45
+Author: abombe <abombe@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Wed Dec 15 22:31:20 1999 +0000
+
+    Added prototypes for async write functions
+    
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@2 53a565d1-3bb7-0310-b661-cf11e63c67ab
+
+commit 0f5ef10baaba0890f7e9bed6545e0614b65e7884
+Author: abombe <abombe@53a565d1-3bb7-0310-b661-cf11e63c67ab>
+Date:   Thu Dec 2 23:07:38 1999 +0000
+
+    Initial revision
+    
+    
+    git-svn-id: svn://svn.linux1394.org/libraw1394/trunk@1 53a565d1-3bb7-0310-b661-cf11e63c67ab
